@@ -1,15 +1,29 @@
 package main
 
 import (
-	"errors"
 	"fmt"
+	"note/note"
 )
 
 func main() {
-	//
+	title, content := getNoteData()
+
+	note, err := note.CreateNewNote(title, content)
+
+	if err != nil {
+		fmt.Print(err)
+		return
+	}
 }
 
-func getUserInput(prompt string) (string, error) {
+func getNoteData() (string, string) {
+	noteTitle := getUserInput("Note Title:")
+	noteContent := getUserInput("Note Content:")
+
+	return noteTitle, noteContent
+}
+
+func getUserInput(prompt string) string {
 	var value string
 	var valuePointer *string = &value
 
@@ -17,9 +31,5 @@ func getUserInput(prompt string) (string, error) {
 
 	fmt.Scan(valuePointer)
 
-	if *valuePointer == "" {
-		return "", errors.New("Invalid input")
-	}
-
-	return value, nil
+	return value
 }

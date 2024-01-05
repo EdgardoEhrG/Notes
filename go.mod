@@ -1,3 +1,3 @@
-module note/m/v2
+module note
 
 go 1.21.5
